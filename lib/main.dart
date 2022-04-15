@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_bloc/features/users/presentaion/bloc/user_bloc.dart';
 
-import 'features/data/models/get_users_model.dart';
-import 'features/presentaion/pages/user_home.dart';
+
+import 'features/users/presentaion/pages/user_home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +18,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  MyHomePage(),
+      home: BlocProvider<UserBloc>(
+        create: (BuildContext context) => UserBloc(),
+        child: const MyHomePage(),
+
+      )
     );
   }
 }
